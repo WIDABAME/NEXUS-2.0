@@ -4,6 +4,7 @@ import android.database.Cursor;
 import android.os.CancellationSignal;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.collection.LongSparseArray;
 import androidx.room.CoroutinesRoom;
 import androidx.room.EntityDeletionOrUpdateAdapter;
 import androidx.room.EntityInsertionAdapter;
@@ -12,6 +13,8 @@ import androidx.room.RoomSQLiteQuery;
 import androidx.room.SharedSQLiteStatement;
 import androidx.room.util.CursorUtil;
 import androidx.room.util.DBUtil;
+import androidx.room.util.RelationUtil;
+import androidx.room.util.StringUtil;
 import androidx.sqlite.db.SupportSQLiteStatement;
 import java.lang.Boolean;
 import java.lang.Class;
@@ -21,6 +24,7 @@ import java.lang.Long;
 import java.lang.Object;
 import java.lang.Override;
 import java.lang.String;
+import java.lang.StringBuilder;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -40,15 +44,29 @@ public final class NexusDao_Impl implements NexusDao {
 
   private final EntityInsertionAdapter<NoteLink> __insertionAdapterOfNoteLink;
 
+  private final EntityInsertionAdapter<Checklist> __insertionAdapterOfChecklist;
+
+  private final EntityInsertionAdapter<ChecklistItem> __insertionAdapterOfChecklistItem;
+
   private final EntityDeletionOrUpdateAdapter<Note> __deletionAdapterOfNote;
 
+  private final EntityDeletionOrUpdateAdapter<Checklist> __deletionAdapterOfChecklist;
+
+  private final EntityDeletionOrUpdateAdapter<ChecklistItem> __deletionAdapterOfChecklistItem;
+
   private final EntityDeletionOrUpdateAdapter<Note> __updateAdapterOfNote;
+
+  private final EntityDeletionOrUpdateAdapter<Checklist> __updateAdapterOfChecklist;
+
+  private final EntityDeletionOrUpdateAdapter<ChecklistItem> __updateAdapterOfChecklistItem;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteLinkById;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteLinksForNote;
 
   private final SharedSQLiteStatement __preparedStmtOfDeleteLinkBetween;
+
+  private final SharedSQLiteStatement __preparedStmtOfDeleteItemsForChecklist;
 
   public NexusDao_Impl(@NonNull final RoomDatabase __db) {
     this.__db = __db;
@@ -83,6 +101,39 @@ public final class NexusDao_Impl implements NexusDao {
         statement.bindLong(3, entity.getToNoteId());
       }
     };
+    this.__insertionAdapterOfChecklist = new EntityInsertionAdapter<Checklist>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `checklists` (`id`,`title`,`createdAt`) VALUES (nullif(?, 0),?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Checklist entity) {
+        statement.bindLong(1, entity.getId());
+        statement.bindString(2, entity.getTitle());
+        statement.bindLong(3, entity.getCreatedAt());
+      }
+    };
+    this.__insertionAdapterOfChecklistItem = new EntityInsertionAdapter<ChecklistItem>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "INSERT OR REPLACE INTO `checklist_items` (`id`,`checklistId`,`text`,`isChecked`,`position`) VALUES (nullif(?, 0),?,?,?,?)";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final ChecklistItem entity) {
+        statement.bindLong(1, entity.getId());
+        statement.bindLong(2, entity.getChecklistId());
+        statement.bindString(3, entity.getText());
+        final int _tmp = entity.isChecked() ? 1 : 0;
+        statement.bindLong(4, _tmp);
+        statement.bindLong(5, entity.getPosition());
+      }
+    };
     this.__deletionAdapterOfNote = new EntityDeletionOrUpdateAdapter<Note>(__db) {
       @Override
       @NonNull
@@ -93,6 +144,32 @@ public final class NexusDao_Impl implements NexusDao {
       @Override
       protected void bind(@NonNull final SupportSQLiteStatement statement,
           @NonNull final Note entity) {
+        statement.bindLong(1, entity.getId());
+      }
+    };
+    this.__deletionAdapterOfChecklist = new EntityDeletionOrUpdateAdapter<Checklist>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "DELETE FROM `checklists` WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Checklist entity) {
+        statement.bindLong(1, entity.getId());
+      }
+    };
+    this.__deletionAdapterOfChecklistItem = new EntityDeletionOrUpdateAdapter<ChecklistItem>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "DELETE FROM `checklist_items` WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final ChecklistItem entity) {
         statement.bindLong(1, entity.getId());
       }
     };
@@ -111,6 +188,41 @@ public final class NexusDao_Impl implements NexusDao {
         statement.bindString(3, entity.getContent());
         statement.bindLong(4, entity.getCreatedAt());
         statement.bindLong(5, entity.getId());
+      }
+    };
+    this.__updateAdapterOfChecklist = new EntityDeletionOrUpdateAdapter<Checklist>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "UPDATE OR ABORT `checklists` SET `id` = ?,`title` = ?,`createdAt` = ? WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final Checklist entity) {
+        statement.bindLong(1, entity.getId());
+        statement.bindString(2, entity.getTitle());
+        statement.bindLong(3, entity.getCreatedAt());
+        statement.bindLong(4, entity.getId());
+      }
+    };
+    this.__updateAdapterOfChecklistItem = new EntityDeletionOrUpdateAdapter<ChecklistItem>(__db) {
+      @Override
+      @NonNull
+      protected String createQuery() {
+        return "UPDATE OR ABORT `checklist_items` SET `id` = ?,`checklistId` = ?,`text` = ?,`isChecked` = ?,`position` = ? WHERE `id` = ?";
+      }
+
+      @Override
+      protected void bind(@NonNull final SupportSQLiteStatement statement,
+          @NonNull final ChecklistItem entity) {
+        statement.bindLong(1, entity.getId());
+        statement.bindLong(2, entity.getChecklistId());
+        statement.bindString(3, entity.getText());
+        final int _tmp = entity.isChecked() ? 1 : 0;
+        statement.bindLong(4, _tmp);
+        statement.bindLong(5, entity.getPosition());
+        statement.bindLong(6, entity.getId());
       }
     };
     this.__preparedStmtOfDeleteLinkById = new SharedSQLiteStatement(__db) {
@@ -134,6 +246,14 @@ public final class NexusDao_Impl implements NexusDao {
       @NonNull
       public String createQuery() {
         final String _query = "DELETE FROM note_links WHERE (fromNoteId = ? AND toNoteId = ?) OR (fromNoteId = ? AND toNoteId = ?)";
+        return _query;
+      }
+    };
+    this.__preparedStmtOfDeleteItemsForChecklist = new SharedSQLiteStatement(__db) {
+      @Override
+      @NonNull
+      public String createQuery() {
+        final String _query = "DELETE FROM checklist_items WHERE checklistId = ?";
         return _query;
       }
     };
@@ -176,6 +296,44 @@ public final class NexusDao_Impl implements NexusDao {
   }
 
   @Override
+  public Object insertChecklist(final Checklist checklist,
+      final Continuation<? super Long> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Long>() {
+      @Override
+      @NonNull
+      public Long call() throws Exception {
+        __db.beginTransaction();
+        try {
+          final Long _result = __insertionAdapterOfChecklist.insertAndReturnId(checklist);
+          __db.setTransactionSuccessful();
+          return _result;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object insertChecklistItem(final ChecklistItem item,
+      final Continuation<? super Long> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Long>() {
+      @Override
+      @NonNull
+      public Long call() throws Exception {
+        __db.beginTransaction();
+        try {
+          final Long _result = __insertionAdapterOfChecklistItem.insertAndReturnId(item);
+          __db.setTransactionSuccessful();
+          return _result;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Object deleteNote(final Note note, final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
@@ -194,6 +352,44 @@ public final class NexusDao_Impl implements NexusDao {
   }
 
   @Override
+  public Object deleteChecklist(final Checklist checklist,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __deletionAdapterOfChecklist.handle(checklist);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object deleteChecklistItem(final ChecklistItem item,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __deletionAdapterOfChecklistItem.handle(item);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
   public Object updateNote(final Note note, final Continuation<? super Unit> $completion) {
     return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
       @Override
@@ -202,6 +398,44 @@ public final class NexusDao_Impl implements NexusDao {
         __db.beginTransaction();
         try {
           __updateAdapterOfNote.handle(note);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object updateChecklist(final Checklist checklist,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __updateAdapterOfChecklist.handle(checklist);
+          __db.setTransactionSuccessful();
+          return Unit.INSTANCE;
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object updateChecklistItem(final ChecklistItem item,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        __db.beginTransaction();
+        try {
+          __updateAdapterOfChecklistItem.handle(item);
           __db.setTransactionSuccessful();
           return Unit.INSTANCE;
         } finally {
@@ -291,6 +525,32 @@ public final class NexusDao_Impl implements NexusDao {
           }
         } finally {
           __preparedStmtOfDeleteLinkBetween.release(_stmt);
+        }
+      }
+    }, $completion);
+  }
+
+  @Override
+  public Object deleteItemsForChecklist(final long checklistId,
+      final Continuation<? super Unit> $completion) {
+    return CoroutinesRoom.execute(__db, true, new Callable<Unit>() {
+      @Override
+      @NonNull
+      public Unit call() throws Exception {
+        final SupportSQLiteStatement _stmt = __preparedStmtOfDeleteItemsForChecklist.acquire();
+        int _argIndex = 1;
+        _stmt.bindLong(_argIndex, checklistId);
+        try {
+          __db.beginTransaction();
+          try {
+            _stmt.executeUpdateDelete();
+            __db.setTransactionSuccessful();
+            return Unit.INSTANCE;
+          } finally {
+            __db.endTransaction();
+          }
+        } finally {
+          __preparedStmtOfDeleteItemsForChecklist.release(_stmt);
         }
       }
     }, $completion);
@@ -518,8 +778,193 @@ public final class NexusDao_Impl implements NexusDao {
     }, $completion);
   }
 
+  @Override
+  public Flow<List<ChecklistWithItems>> getChecklistsWithItems() {
+    final String _sql = "SELECT * FROM checklists ORDER BY createdAt DESC";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 0);
+    return CoroutinesRoom.createFlow(__db, true, new String[] {"checklist_items",
+        "checklists"}, new Callable<List<ChecklistWithItems>>() {
+      @Override
+      @NonNull
+      public List<ChecklistWithItems> call() throws Exception {
+        __db.beginTransaction();
+        try {
+          final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
+          try {
+            final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+            final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+            final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+            final LongSparseArray<ArrayList<ChecklistItem>> _collectionItems = new LongSparseArray<ArrayList<ChecklistItem>>();
+            while (_cursor.moveToNext()) {
+              final long _tmpKey;
+              _tmpKey = _cursor.getLong(_cursorIndexOfId);
+              if (!_collectionItems.containsKey(_tmpKey)) {
+                _collectionItems.put(_tmpKey, new ArrayList<ChecklistItem>());
+              }
+            }
+            _cursor.moveToPosition(-1);
+            __fetchRelationshipchecklistItemsAscomNexusAppDataChecklistItem(_collectionItems);
+            final List<ChecklistWithItems> _result = new ArrayList<ChecklistWithItems>(_cursor.getCount());
+            while (_cursor.moveToNext()) {
+              final ChecklistWithItems _item;
+              final Checklist _tmpChecklist;
+              final long _tmpId;
+              _tmpId = _cursor.getLong(_cursorIndexOfId);
+              final String _tmpTitle;
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+              final long _tmpCreatedAt;
+              _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+              _tmpChecklist = new Checklist(_tmpId,_tmpTitle,_tmpCreatedAt);
+              final ArrayList<ChecklistItem> _tmpItemsCollection;
+              final long _tmpKey_1;
+              _tmpKey_1 = _cursor.getLong(_cursorIndexOfId);
+              _tmpItemsCollection = _collectionItems.get(_tmpKey_1);
+              _item = new ChecklistWithItems(_tmpChecklist,_tmpItemsCollection);
+              _result.add(_item);
+            }
+            __db.setTransactionSuccessful();
+            return _result;
+          } finally {
+            _cursor.close();
+          }
+        } finally {
+          __db.endTransaction();
+        }
+      }
+
+      @Override
+      protected void finalize() {
+        _statement.release();
+      }
+    });
+  }
+
+  @Override
+  public Object getChecklistWithItemsById(final long id,
+      final Continuation<? super ChecklistWithItems> $completion) {
+    final String _sql = "SELECT * FROM checklists WHERE id = ?";
+    final RoomSQLiteQuery _statement = RoomSQLiteQuery.acquire(_sql, 1);
+    int _argIndex = 1;
+    _statement.bindLong(_argIndex, id);
+    final CancellationSignal _cancellationSignal = DBUtil.createCancellationSignal();
+    return CoroutinesRoom.execute(__db, true, _cancellationSignal, new Callable<ChecklistWithItems>() {
+      @Override
+      @Nullable
+      public ChecklistWithItems call() throws Exception {
+        __db.beginTransaction();
+        try {
+          final Cursor _cursor = DBUtil.query(__db, _statement, true, null);
+          try {
+            final int _cursorIndexOfId = CursorUtil.getColumnIndexOrThrow(_cursor, "id");
+            final int _cursorIndexOfTitle = CursorUtil.getColumnIndexOrThrow(_cursor, "title");
+            final int _cursorIndexOfCreatedAt = CursorUtil.getColumnIndexOrThrow(_cursor, "createdAt");
+            final LongSparseArray<ArrayList<ChecklistItem>> _collectionItems = new LongSparseArray<ArrayList<ChecklistItem>>();
+            while (_cursor.moveToNext()) {
+              final long _tmpKey;
+              _tmpKey = _cursor.getLong(_cursorIndexOfId);
+              if (!_collectionItems.containsKey(_tmpKey)) {
+                _collectionItems.put(_tmpKey, new ArrayList<ChecklistItem>());
+              }
+            }
+            _cursor.moveToPosition(-1);
+            __fetchRelationshipchecklistItemsAscomNexusAppDataChecklistItem(_collectionItems);
+            final ChecklistWithItems _result;
+            if (_cursor.moveToFirst()) {
+              final Checklist _tmpChecklist;
+              final long _tmpId;
+              _tmpId = _cursor.getLong(_cursorIndexOfId);
+              final String _tmpTitle;
+              _tmpTitle = _cursor.getString(_cursorIndexOfTitle);
+              final long _tmpCreatedAt;
+              _tmpCreatedAt = _cursor.getLong(_cursorIndexOfCreatedAt);
+              _tmpChecklist = new Checklist(_tmpId,_tmpTitle,_tmpCreatedAt);
+              final ArrayList<ChecklistItem> _tmpItemsCollection;
+              final long _tmpKey_1;
+              _tmpKey_1 = _cursor.getLong(_cursorIndexOfId);
+              _tmpItemsCollection = _collectionItems.get(_tmpKey_1);
+              _result = new ChecklistWithItems(_tmpChecklist,_tmpItemsCollection);
+            } else {
+              _result = null;
+            }
+            __db.setTransactionSuccessful();
+            return _result;
+          } finally {
+            _cursor.close();
+            _statement.release();
+          }
+        } finally {
+          __db.endTransaction();
+        }
+      }
+    }, $completion);
+  }
+
   @NonNull
   public static List<Class<?>> getRequiredConverters() {
     return Collections.emptyList();
+  }
+
+  private void __fetchRelationshipchecklistItemsAscomNexusAppDataChecklistItem(
+      @NonNull final LongSparseArray<ArrayList<ChecklistItem>> _map) {
+    if (_map.isEmpty()) {
+      return;
+    }
+    if (_map.size() > RoomDatabase.MAX_BIND_PARAMETER_CNT) {
+      RelationUtil.recursiveFetchLongSparseArray(_map, true, (map) -> {
+        __fetchRelationshipchecklistItemsAscomNexusAppDataChecklistItem(map);
+        return Unit.INSTANCE;
+      });
+      return;
+    }
+    final StringBuilder _stringBuilder = StringUtil.newStringBuilder();
+    _stringBuilder.append("SELECT `id`,`checklistId`,`text`,`isChecked`,`position` FROM `checklist_items` WHERE `checklistId` IN (");
+    final int _inputSize = _map.size();
+    StringUtil.appendPlaceholders(_stringBuilder, _inputSize);
+    _stringBuilder.append(")");
+    final String _sql = _stringBuilder.toString();
+    final int _argCount = 0 + _inputSize;
+    final RoomSQLiteQuery _stmt = RoomSQLiteQuery.acquire(_sql, _argCount);
+    int _argIndex = 1;
+    for (int i = 0; i < _map.size(); i++) {
+      final long _item = _map.keyAt(i);
+      _stmt.bindLong(_argIndex, _item);
+      _argIndex++;
+    }
+    final Cursor _cursor = DBUtil.query(__db, _stmt, false, null);
+    try {
+      final int _itemKeyIndex = CursorUtil.getColumnIndex(_cursor, "checklistId");
+      if (_itemKeyIndex == -1) {
+        return;
+      }
+      final int _cursorIndexOfId = 0;
+      final int _cursorIndexOfChecklistId = 1;
+      final int _cursorIndexOfText = 2;
+      final int _cursorIndexOfIsChecked = 3;
+      final int _cursorIndexOfPosition = 4;
+      while (_cursor.moveToNext()) {
+        final long _tmpKey;
+        _tmpKey = _cursor.getLong(_itemKeyIndex);
+        final ArrayList<ChecklistItem> _tmpRelation = _map.get(_tmpKey);
+        if (_tmpRelation != null) {
+          final ChecklistItem _item_1;
+          final long _tmpId;
+          _tmpId = _cursor.getLong(_cursorIndexOfId);
+          final long _tmpChecklistId;
+          _tmpChecklistId = _cursor.getLong(_cursorIndexOfChecklistId);
+          final String _tmpText;
+          _tmpText = _cursor.getString(_cursorIndexOfText);
+          final boolean _tmpIsChecked;
+          final int _tmp;
+          _tmp = _cursor.getInt(_cursorIndexOfIsChecked);
+          _tmpIsChecked = _tmp != 0;
+          final int _tmpPosition;
+          _tmpPosition = _cursor.getInt(_cursorIndexOfPosition);
+          _item_1 = new ChecklistItem(_tmpId,_tmpChecklistId,_tmpText,_tmpIsChecked,_tmpPosition);
+          _tmpRelation.add(_item_1);
+        }
+      }
+    } finally {
+      _cursor.close();
+    }
   }
 }

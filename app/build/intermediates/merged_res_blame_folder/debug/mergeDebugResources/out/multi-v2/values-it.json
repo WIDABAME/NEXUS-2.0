@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.nexus.app-mergeDebugResources-52:/values-it/values-it.xml",
+            "outputFile": "com.nexus.app-mergeDebugResources-54:/values-it/values-it.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Wilmer Barco\\.gradle\\caches\\transforms-4\\a0abdf354e700bcaac1126606a1fdc0d\\transformed\\material3-release\\res\\values-it\\values-it.xml",

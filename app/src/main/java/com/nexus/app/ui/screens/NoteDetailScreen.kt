@@ -1,5 +1,6 @@
 package com.nexus.app.ui.screens
 
+import androidx.activity.compose.BackHandler
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -42,6 +43,15 @@ fun NoteDetailScreen(
     var title by remember(current.id) { mutableStateOf(current.title) }
     var content by remember(current.id) { mutableStateOf(current.content) }
 
+    val handleSaveAndBack = {
+        viewModel.updateNote(current.copy(title = title, content = content))
+        onBack()
+    }
+
+    BackHandler {
+        handleSaveAndBack()
+    }
+
     val relatedLinks = links.filter { it.fromNoteId == current.id || it.toNoteId == current.id }
     val linkedNotes = relatedLinks.mapNotNull { link ->
         val otherId = if (link.fromNoteId == current.id) link.toNoteId else link.fromNoteId
@@ -57,10 +67,7 @@ fun NoteDetailScreen(
                     titleContentColor = com.nexus.app.ui.theme.NexusTextPrimary
                 ),
                 navigationIcon = {
-                    IconButton(onClick = {
-                        viewModel.updateNote(current.copy(title = title, content = content))
-                        onBack()
-                    }) {
+                    IconButton(onClick = handleSaveAndBack) {
                         Icon(Icons.Default.ArrowBack, contentDescription = "Volver", tint = com.nexus.app.ui.theme.NexusTextPrimary)
                     }
                 },

@@ -5,7 +5,9 @@ drawable ic_launcher_background
 drawable ic_launcher_foreground
 drawable ic_nexus_logo
 drawable splash_background
+drawable transparent_icon
 mipmap ic_launcher
 mipmap ic_launcher_round
 string app_name
+style Theme.Nexus.Main
 style Theme.Nexus.Splash

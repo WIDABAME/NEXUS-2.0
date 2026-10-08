@@ -1,0 +1,56 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="100dp"
+    android:height="100dp"
+    android:viewportWidth="100"
+    android:viewportHeight="100">
+
+    <!-- Dark Blue Background circle -->
+    <path
+        android:pathData="M50,2 A48,48 0 1,0 50,98 A48,48 0 1,0 50,2"
+        android:fillColor="#0B1019"/>
+
+    <!-- Outer glowing rings -->
+    <path
+        android:pathData="M50,10 A40,40 0 1,0 50,90 A40,40 0 1,0 50,10"
+        android:strokeColor="#2022D3BB"
+        android:strokeWidth="1.5"/>
+
+    <path
+        android:pathData="M50,18 A32,32 0 1,0 50,82 A32,32 0 1,0 50,18"
+        android:strokeColor="#4022D3BB"
+        android:strokeWidth="1.5"/>
+
+    <path
+        android:pathData="M50,26 A24,24 0 1,0 50,74 A24,24 0 1,0 50,26"
+        android:fillColor="#200B8272"
+        android:strokeColor="#600B8272"
+        android:strokeWidth="1.5"/>
+
+    <!-- Network Connection Lines -->
+    <path
+        android:pathData="M34,42 L66,44 M34,42 L50,50 M66,44 L50,50 M50,50 L38,67 M50,50 L64,65 M38,67 L64,65 M34,42 L38,67 M66,44 L64,65"
+        android:strokeColor="#22D3BB"
+        android:strokeWidth="2.4"
+        android:strokeLineCap="round"/>
+
+    <!-- Network Nodes -->
+    <path
+        android:pathData="M50,50 m-5,0 a5,5 0 1,0 10,0 a5,5 0 1,0 -10,0"
+        android:fillColor="#22D3BB"/>
+
+    <path
+        android:pathData="M34,42 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0"
+        android:fillColor="#22D3BB"/>
+
+    <path
+        android:pathData="M66,44 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0"
+        android:fillColor="#22D3BB"/>
+
+    <path
+        android:pathData="M38,67 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0"
+        android:fillColor="#22D3BB"/>
+
+    <path
+        android:pathData="M64,65 m-3.2,0 a3.2,3.2 0 1,0 6.4,0 a3.2,3.2 0 1,0 -6.4,0"
+        android:fillColor="#22D3BB"/>
+</vector>

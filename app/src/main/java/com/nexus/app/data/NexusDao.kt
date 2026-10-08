@@ -44,4 +44,34 @@ interface NexusDao {
 
     @Query("DELETE FROM note_links WHERE (fromNoteId = :id1 AND toNoteId = :id2) OR (fromNoteId = :id2 AND toNoteId = :id1)")
     suspend fun deleteLinkBetween(id1: Long, id2: Long)
+
+    // Checklists queries & mutations
+    @Transaction
+    @Query("SELECT * FROM checklists ORDER BY createdAt DESC")
+    fun getChecklistsWithItems(): Flow<List<ChecklistWithItems>>
+
+    @Transaction
+    @Query("SELECT * FROM checklists WHERE id = :id")
+    suspend fun getChecklistWithItemsById(id: Long): ChecklistWithItems?
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertChecklist(checklist: Checklist): Long
+
+    @Update
+    suspend fun updateChecklist(checklist: Checklist)
+
+    @Delete
+    suspend fun deleteChecklist(checklist: Checklist)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertChecklistItem(item: ChecklistItem): Long
+
+    @Update
+    suspend fun updateChecklistItem(item: ChecklistItem)
+
+    @Delete
+    suspend fun deleteChecklistItem(item: ChecklistItem)
+
+    @Query("DELETE FROM checklist_items WHERE checklistId = :checklistId")
+    suspend fun deleteItemsForChecklist(checklistId: Long)
 }

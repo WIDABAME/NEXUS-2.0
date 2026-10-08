@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "com.nexus.app-mergeDebugResources-52:/values-sq/values-sq.xml",
+            "outputFile": "com.nexus.app-mergeDebugResources-54:/values-sq/values-sq.xml",
             "map": [
                 {
                     "source": "C:\\Users\\Wilmer Barco\\.gradle\\caches\\transforms-4\\243f528b9b2308be770cafd9f2a3310f\\transformed\\foundation-release\\res\\values-sq\\values-sq.xml",

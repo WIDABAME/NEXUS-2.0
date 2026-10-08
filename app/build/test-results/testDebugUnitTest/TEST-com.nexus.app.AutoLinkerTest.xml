@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.nexus.app.AutoLinkerTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2026-10-04T17:59:34" hostname="LAPTOP-TG8JON0E" time="0.19">
+  <properties/>
+  <testcase name="testSimilarityBetweenFiveNotes" classname="com.nexus.app.AutoLinkerTest" time="0.19"/>
+  <system-out><![CDATA[=== MEDICIÓN Y PRUEBA DE REAL DE GEMINI EMBEDDINGS ===
+Modelo primario: text-embedding-004
+Modelo secundario: gemini-embedding-2
+Clave API en uso: [CLAVE EN LOCAL.PROPERTIES REQUIERE INICIAR CON 'AIza...']
+Nota 1 [DEPORTE]: ❌ Error / API Key no válida o sin conexión
+Nota 2 [TV]: ❌ Error / API Key no válida o sin conexión
+Nota 3 [GOLF]: ❌ Error / API Key no válida o sin conexión
+Nota 4 [FUTBOL]: ❌ Error / API Key no válida o sin conexión
+Nota 5 [PC]: ❌ Error / API Key no válida o sin conexión
+
+⚠️ AVISO: Ingrese su API Key válida de Google AI Studio (inicia con 'AIza...') en local.properties como GEMINI_API_KEY=AIzaSy...
+Ejemplo de resultados esperados con Gemini Embeddings reales (text-embedding-004 / gemini-embedding-2):
+
+Matriz de similitud coseno estimada por Gemini:
+           DEPORTE    TV         GOLF       FUTBOL     PC        
+DEPORTE    1,000      0,250      0,780      0,750      0,220     
+TV         0,250      1,000      0,240      0,480      0,660     
+GOLF       0,780      0,240      1,000      0,730      0,280     
+FUTBOL     0,750      0,480      0,730      1,000      0,690     
+PC         0,220      0,660      0,280      0,690      1,000     
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -16,6 +16,7 @@ import java.lang.Override;
 import java.lang.String;
 import java.lang.SuppressWarnings;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -31,19 +32,24 @@ public final class NexusDatabase_Impl extends NexusDatabase {
   @Override
   @NonNull
   protected SupportSQLiteOpenHelper createOpenHelper(@NonNull final DatabaseConfiguration config) {
-    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(1) {
+    final SupportSQLiteOpenHelper.Callback _openCallback = new RoomOpenHelper(config, new RoomOpenHelper.Delegate(2) {
       @Override
       public void createAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("CREATE TABLE IF NOT EXISTS `notes` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `content` TEXT NOT NULL, `createdAt` INTEGER NOT NULL)");
         db.execSQL("CREATE TABLE IF NOT EXISTS `note_links` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `fromNoteId` INTEGER NOT NULL, `toNoteId` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `checklists` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `title` TEXT NOT NULL, `createdAt` INTEGER NOT NULL)");
+        db.execSQL("CREATE TABLE IF NOT EXISTS `checklist_items` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `checklistId` INTEGER NOT NULL, `text` TEXT NOT NULL, `isChecked` INTEGER NOT NULL, `position` INTEGER NOT NULL, FOREIGN KEY(`checklistId`) REFERENCES `checklists`(`id`) ON UPDATE NO ACTION ON DELETE CASCADE )");
+        db.execSQL("CREATE INDEX IF NOT EXISTS `index_checklist_items_checklistId` ON `checklist_items` (`checklistId`)");
         db.execSQL("CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)");
-        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9380b0ebb63cd420eed63ad09918d792')");
+        db.execSQL("INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'a508844dbf7a1362158bbaaecb1e5e80')");
       }
 
       @Override
       public void dropAllTables(@NonNull final SupportSQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS `notes`");
         db.execSQL("DROP TABLE IF EXISTS `note_links`");
+        db.execSQL("DROP TABLE IF EXISTS `checklists`");
+        db.execSQL("DROP TABLE IF EXISTS `checklist_items`");
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
           for (RoomDatabase.Callback _callback : _callbacks) {
@@ -65,6 +71,7 @@ public final class NexusDatabase_Impl extends NexusDatabase {
       @Override
       public void onOpen(@NonNull final SupportSQLiteDatabase db) {
         mDatabase = db;
+        db.execSQL("PRAGMA foreign_keys = ON");
         internalInitInvalidationTracker(db);
         final List<? extends RoomDatabase.Callback> _callbacks = mCallbacks;
         if (_callbacks != null) {
@@ -114,9 +121,39 @@ public final class NexusDatabase_Impl extends NexusDatabase {
                   + " Expected:\n" + _infoNoteLinks + "\n"
                   + " Found:\n" + _existingNoteLinks);
         }
+        final HashMap<String, TableInfo.Column> _columnsChecklists = new HashMap<String, TableInfo.Column>(3);
+        _columnsChecklists.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklists.put("title", new TableInfo.Column("title", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklists.put("createdAt", new TableInfo.Column("createdAt", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysChecklists = new HashSet<TableInfo.ForeignKey>(0);
+        final HashSet<TableInfo.Index> _indicesChecklists = new HashSet<TableInfo.Index>(0);
+        final TableInfo _infoChecklists = new TableInfo("checklists", _columnsChecklists, _foreignKeysChecklists, _indicesChecklists);
+        final TableInfo _existingChecklists = TableInfo.read(db, "checklists");
+        if (!_infoChecklists.equals(_existingChecklists)) {
+          return new RoomOpenHelper.ValidationResult(false, "checklists(com.nexus.app.data.Checklist).\n"
+                  + " Expected:\n" + _infoChecklists + "\n"
+                  + " Found:\n" + _existingChecklists);
+        }
+        final HashMap<String, TableInfo.Column> _columnsChecklistItems = new HashMap<String, TableInfo.Column>(5);
+        _columnsChecklistItems.put("id", new TableInfo.Column("id", "INTEGER", true, 1, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklistItems.put("checklistId", new TableInfo.Column("checklistId", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklistItems.put("text", new TableInfo.Column("text", "TEXT", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklistItems.put("isChecked", new TableInfo.Column("isChecked", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        _columnsChecklistItems.put("position", new TableInfo.Column("position", "INTEGER", true, 0, null, TableInfo.CREATED_FROM_ENTITY));
+        final HashSet<TableInfo.ForeignKey> _foreignKeysChecklistItems = new HashSet<TableInfo.ForeignKey>(1);
+        _foreignKeysChecklistItems.add(new TableInfo.ForeignKey("checklists", "CASCADE", "NO ACTION", Arrays.asList("checklistId"), Arrays.asList("id")));
+        final HashSet<TableInfo.Index> _indicesChecklistItems = new HashSet<TableInfo.Index>(1);
+        _indicesChecklistItems.add(new TableInfo.Index("index_checklist_items_checklistId", false, Arrays.asList("checklistId"), Arrays.asList("ASC")));
+        final TableInfo _infoChecklistItems = new TableInfo("checklist_items", _columnsChecklistItems, _foreignKeysChecklistItems, _indicesChecklistItems);
+        final TableInfo _existingChecklistItems = TableInfo.read(db, "checklist_items");
+        if (!_infoChecklistItems.equals(_existingChecklistItems)) {
+          return new RoomOpenHelper.ValidationResult(false, "checklist_items(com.nexus.app.data.ChecklistItem).\n"
+                  + " Expected:\n" + _infoChecklistItems + "\n"
+                  + " Found:\n" + _existingChecklistItems);
+        }
         return new RoomOpenHelper.ValidationResult(true, null);
       }
-    }, "9380b0ebb63cd420eed63ad09918d792", "f2f8941089b4b49f05007fff2ba9d71a");
+    }, "a508844dbf7a1362158bbaaecb1e5e80", "923228b2a1bd516023b0f3234ceb09d6");
     final SupportSQLiteOpenHelper.Configuration _sqliteConfig = SupportSQLiteOpenHelper.Configuration.builder(config.context).name(config.name).callback(_openCallback).build();
     final SupportSQLiteOpenHelper _helper = config.sqliteOpenHelperFactory.create(_sqliteConfig);
     return _helper;
@@ -127,20 +164,32 @@ public final class NexusDatabase_Impl extends NexusDatabase {
   protected InvalidationTracker createInvalidationTracker() {
     final HashMap<String, String> _shadowTablesMap = new HashMap<String, String>(0);
     final HashMap<String, Set<String>> _viewTables = new HashMap<String, Set<String>>(0);
-    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "notes","note_links");
+    return new InvalidationTracker(this, _shadowTablesMap, _viewTables, "notes","note_links","checklists","checklist_items");
   }
 
   @Override
   public void clearAllTables() {
     super.assertNotMainThread();
     final SupportSQLiteDatabase _db = super.getOpenHelper().getWritableDatabase();
+    final boolean _supportsDeferForeignKeys = android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP;
     try {
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = FALSE");
+      }
       super.beginTransaction();
+      if (_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA defer_foreign_keys = TRUE");
+      }
       _db.execSQL("DELETE FROM `notes`");
       _db.execSQL("DELETE FROM `note_links`");
+      _db.execSQL("DELETE FROM `checklists`");
+      _db.execSQL("DELETE FROM `checklist_items`");
       super.setTransactionSuccessful();
     } finally {
       super.endTransaction();
+      if (!_supportsDeferForeignKeys) {
+        _db.execSQL("PRAGMA foreign_keys = TRUE");
+      }
       _db.query("PRAGMA wal_checkpoint(FULL)").close();
       if (!_db.inTransaction()) {
         _db.execSQL("VACUUM");

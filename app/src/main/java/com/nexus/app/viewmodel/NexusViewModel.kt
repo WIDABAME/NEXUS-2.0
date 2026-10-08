@@ -3,6 +3,9 @@ package com.nexus.app.viewmodel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
+import com.nexus.app.data.Checklist
+import com.nexus.app.data.ChecklistItem
+import com.nexus.app.data.ChecklistWithItems
 import com.nexus.app.data.NexusDatabase
 import com.nexus.app.data.NexusRepository
 import com.nexus.app.data.Note
@@ -34,6 +37,10 @@ class NexusViewModel(application: Application) : AndroidViewModel(application) {
     )
 
     val links: StateFlow<List<NoteLink>> = repo.links.stateIn(
+        viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList()
+    )
+
+    val checklists: StateFlow<List<ChecklistWithItems>> = repo.checklists.stateIn(
         viewModelScope, SharingStarted.WhileSubscribed(5000), emptyList()
     )
 
@@ -79,6 +86,44 @@ class NexusViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch {
             val created = repo.autoLinkAllNotes()
             onResult(created)
+        }
+    }
+
+    // Checklist functions
+    fun createChecklist(title: String, items: List<Pair<String, Boolean>>, onCreated: (Long) -> Unit = {}) {
+        viewModelScope.launch {
+            val id = repo.createChecklist(title, items)
+            onCreated(id)
+        }
+    }
+
+    fun addChecklistItem(checklistId: Long, text: String) {
+        viewModelScope.launch {
+            repo.addChecklistItem(checklistId, text)
+        }
+    }
+
+    fun toggleChecklistItem(item: ChecklistItem) {
+        viewModelScope.launch {
+            repo.toggleChecklistItem(item)
+        }
+    }
+
+    fun deleteChecklistItem(item: ChecklistItem) {
+        viewModelScope.launch {
+            repo.deleteChecklistItem(item)
+        }
+    }
+
+    fun deleteChecklist(checklist: Checklist) {
+        viewModelScope.launch {
+            repo.deleteChecklist(checklist)
+        }
+    }
+
+    fun updateChecklistTitle(checklist: Checklist, newTitle: String) {
+        viewModelScope.launch {
+            repo.updateChecklistTitle(checklist, newTitle)
         }
     }
 

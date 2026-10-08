@@ -1,9 +1,11 @@
 -- Merging decision tree log ---
 manifest
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-23:12
-INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-23:12
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-25:12
+INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:1-25:12
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e89bcace8496eda3cb6161a65fdf3d05\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\c9231f337c54069af79377ff824750fb\transformed\generativeai-0.9.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\fe0bfa0d5983e4510a88f46c7299367f\transformed\navigation-common-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\ab1f5857df2cdd9ec92205362f09a229\transformed\navigation-runtime-2.7.7\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.navigation:navigation-common-ktx:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\938d43e392aa6764573d52ba27c67c88\transformed\navigation-common-ktx-2.7.7\AndroidManifest.xml:2:1-7:12
@@ -43,19 +45,21 @@ MERGED from [androidx.lifecycle:lifecycle-viewmodel-compose-android:2.8.4] C:\Us
 MERGED from [androidx.compose.ui:ui-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\7a7c935af36228e4d0507fa5e15344b6\transformed\ui-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\74c0dbec5820d6e072a07f659d887010\transformed\autofill-1.0.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e91d43edd169d12026c8450ba62b92db\transformed\core-1.13.1\AndroidManifest.xml:17:1-30:12
+MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\050ca786115fa4cd16dcd01477362847\transformed\common-0.8.0\AndroidManifest.xml:17:1-24:12
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\dd42e38183cb7d9a90b69ba4cfad41b5\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:17:1-23:12
 MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d33bee1637304cf060ddfc55a5600f8f\transformed\core-ktx-1.13.1\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3491be084682f777f2359a2bc8e00d91\transformed\room-runtime-2.6.1\AndroidManifest.xml:17:1-31:12
 MERGED from [androidx.room:room-ktx:2.6.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\4846b42d71b9682bc33dd8f717247987\transformed\room-ktx-2.6.1\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\cd4a2786e58cc42f09da01120e8ec02c\transformed\sqlite-framework-2.4.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\a2c1f44d85a58bea855e8e881fed3c91\transformed\sqlite-2.4.0\AndroidManifest.xml:17:1-22:12
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\5373f9c4ad0a3edc85bee31e8d8d77dc\transformed\runtime-saveable-release\AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\7cb4d70bc8dce8c244de576ac198624d\transformed\runtime-release\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.security:security-crypto:1.1.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\6000899af0992c6b9c7aeef3399c176c\transformed\security-crypto-1.1.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3b4cbc485de508abdcc6b67de782fc42\transformed\core-runtime-2.2.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d1a8b21dc3a64323cc9bd8d7a9c1031b\transformed\interpolator-1.0.0\AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:17:1-27:12
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:17:1-55:12
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d4dd02a3897b1441880b8fdd2da8ae00\transformed\startup-runtime-1.1.1\AndroidManifest.xml:17:1-33:12
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\f2e9c73a68070fd6ad1518ac571d0953\transformed\tracing-1.0.0\AndroidManifest.xml:17:1-24:12
 	package
@@ -66,9 +70,17 @@ MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Wilmer Barco\.gradle\cache
 		INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml
 	xmlns:android
 		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:2:11-69
+uses-permission#android.permission.INTERNET
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:4:5-67
+MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\c9231f337c54069af79377ff824750fb\transformed\generativeai-0.9.0\AndroidManifest.xml:22:5-67
+MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\c9231f337c54069af79377ff824750fb\transformed\generativeai-0.9.0\AndroidManifest.xml:22:5-67
+MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\050ca786115fa4cd16dcd01477362847\transformed\common-0.8.0\AndroidManifest.xml:22:5-67
+MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\050ca786115fa4cd16dcd01477362847\transformed\common-0.8.0\AndroidManifest.xml:22:5-67
+	android:name
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:4:22-64
 application
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:4:5-21:19
-INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:4:5-21:19
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:6:5-23:19
+INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:6:5-23:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\6eeb287f86f81a3982838f69de2024a5\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\6eeb287f86f81a3982838f69de2024a5\transformed\ui-tooling-release\AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.emoji2:emoji2:1.3.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\8d265db809aefe6ba535572b60a1cbcb\transformed\emoji2-1.3.0\AndroidManifest.xml:23:5-33:19
@@ -79,10 +91,10 @@ MERGED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\tra
 MERGED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e91d43edd169d12026c8450ba62b92db\transformed\core-1.13.1\AndroidManifest.xml:28:5-89
 MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3491be084682f777f2359a2bc8e00d91\transformed\room-runtime-2.6.1\AndroidManifest.xml:23:5-29:19
 MERGED from [androidx.room:room-runtime:2.6.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3491be084682f777f2359a2bc8e00d91\transformed\room-runtime-2.6.1\AndroidManifest.xml:23:5-29:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
-MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
 MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:24:5-25:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d4dd02a3897b1441880b8fdd2da8ae00\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d4dd02a3897b1441880b8fdd2da8ae00\transformed\startup-runtime-1.1.1\AndroidManifest.xml:25:5-31:19
 	android:extractNativeLibs
@@ -90,39 +102,43 @@ MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.grad
 	android:appComponentFactory
 		ADDED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e91d43edd169d12026c8450ba62b92db\transformed\core-1.13.1\AndroidManifest.xml:28:18-86
 	android:supportsRtl
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:10:9-35
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:12:9-35
 	android:label
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:8:9-41
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:10:9-41
 	android:roundIcon
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:7:9-54
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:9:9-54
 	android:icon
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:6:9-43
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:8:9-43
 	android:allowBackup
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:5:9-35
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:7:9-35
 	android:theme
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:9:9-50
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:11:9-50
 activity#com.nexus.app.MainActivity
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:12:9-20:20
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:14:9-22:20
 	android:exported
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:14:13-36
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:16:13-36
 	android:theme
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:15:13-54
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:17:13-54
 	android:name
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:13:13-41
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:15:13-41
 intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:16:13-19:29
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:18:13-21:29
 action#android.intent.action.MAIN
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:17:17-69
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:19:17-69
 	android:name
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:17:25-66
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:19:25-66
 category#android.intent.category.LAUNCHER
-ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:18:17-77
+ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:20:17-77
 	android:name
-		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:18:27-74
+		ADDED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml:20:27-74
 uses-sdk
 INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
 INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml
 INJECTED from C:\Users\Wilmer Barco\Desktop\NexusApp\NexusApp\app\src\main\AndroidManifest.xml
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e89bcace8496eda3cb6161a65fdf3d05\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core-splashscreen:1.0.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e89bcace8496eda3cb6161a65fdf3d05\transformed\core-splashscreen-1.0.1\AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\c9231f337c54069af79377ff824750fb\transformed\generativeai-0.9.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.ai.client.generativeai:generativeai:0.9.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\c9231f337c54069af79377ff824750fb\transformed\generativeai-0.9.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\fe0bfa0d5983e4510a88f46c7299367f\transformed\navigation-common-2.7.7\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-common:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\fe0bfa0d5983e4510a88f46c7299367f\transformed\navigation-common-2.7.7\AndroidManifest.xml:20:5-44
 MERGED from [androidx.navigation:navigation-runtime:2.7.7] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\ab1f5857df2cdd9ec92205362f09a229\transformed\navigation-runtime-2.7.7\AndroidManifest.xml:20:5-44
@@ -201,6 +217,8 @@ MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Wilmer Barco\.gradle\cac
 MERGED from [androidx.autofill:autofill:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\74c0dbec5820d6e072a07f659d887010\transformed\autofill-1.0.0\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e91d43edd169d12026c8450ba62b92db\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
 MERGED from [androidx.core:core:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\e91d43edd169d12026c8450ba62b92db\transformed\core-1.13.1\AndroidManifest.xml:20:5-44
+MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\050ca786115fa4cd16dcd01477362847\transformed\common-0.8.0\AndroidManifest.xml:20:5-44
+MERGED from [com.google.ai.client.generativeai:common:0.8.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\050ca786115fa4cd16dcd01477362847\transformed\common-0.8.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\dd42e38183cb7d9a90b69ba4cfad41b5\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.customview:customview-poolingcontainer:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\dd42e38183cb7d9a90b69ba4cfad41b5\transformed\customview-poolingcontainer-1.0.0\AndroidManifest.xml:20:5-21:38
 MERGED from [androidx.core:core-ktx:1.13.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d33bee1637304cf060ddfc55a5600f8f\transformed\core-ktx-1.13.1\AndroidManifest.xml:5:5-44
@@ -213,20 +231,22 @@ MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\Wilmer Barco\.grad
 MERGED from [androidx.sqlite:sqlite-framework:2.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\cd4a2786e58cc42f09da01120e8ec02c\transformed\sqlite-framework-2.4.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\a2c1f44d85a58bea855e8e881fed3c91\transformed\sqlite-2.4.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.sqlite:sqlite:2.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\a2c1f44d85a58bea855e8e881fed3c91\transformed\sqlite-2.4.0\AndroidManifest.xml:20:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
-MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\5373f9c4ad0a3edc85bee31e8d8d77dc\transformed\runtime-saveable-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-saveable-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\5373f9c4ad0a3edc85bee31e8d8d77dc\transformed\runtime-saveable-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\7cb4d70bc8dce8c244de576ac198624d\transformed\runtime-release\AndroidManifest.xml:5:5-44
 MERGED from [androidx.compose.runtime:runtime-android:1.6.8] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\7cb4d70bc8dce8c244de576ac198624d\transformed\runtime-release\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\efdcc402ed8e7fa891c97037c96eceec\transformed\annotation-experimental-1.4.0\AndroidManifest.xml:5:5-44
+MERGED from [androidx.security:security-crypto:1.1.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\6000899af0992c6b9c7aeef3399c176c\transformed\security-crypto-1.1.0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.security:security-crypto:1.1.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\6000899af0992c6b9c7aeef3399c176c\transformed\security-crypto-1.1.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3b4cbc485de508abdcc6b67de782fc42\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.arch.core:core-runtime:2.2.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\3b4cbc485de508abdcc6b67de782fc42\transformed\core-runtime-2.2.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d1a8b21dc3a64323cc9bd8d7a9c1031b\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d1a8b21dc3a64323cc9bd8d7a9c1031b\transformed\interpolator-1.0.0\AndroidManifest.xml:20:5-44
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
 MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\259b4b155bd65ae43561961fd4e59cfb\transformed\versionedparcelable-1.1.1\AndroidManifest.xml:20:5-22:41
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
-MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\16e301cf918698b0162b7c845acd09ac\transformed\profileinstaller-1.3.1\AndroidManifest.xml:21:5-44
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d4dd02a3897b1441880b8fdd2da8ae00\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.startup:startup-runtime:1.1.1] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\d4dd02a3897b1441880b8fdd2da8ae00\transformed\startup-runtime-1.1.1\AndroidManifest.xml:21:5-23:41
 MERGED from [androidx.tracing:tracing:1.0.0] C:\Users\Wilmer Barco\.gradle\caches\transforms-4\f2e9c73a68070fd6ad1518ac571d0953\transformed\tracing-1.0.0\AndroidManifest.xml:20:5-22:41
