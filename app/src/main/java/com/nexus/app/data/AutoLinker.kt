@@ -27,8 +27,8 @@ object AutoLinker {
     var secondaryModel: String = "gemini-embedding-2"
 
     // Umbral de similitud de coseno (0.0 a 1.0)
-    // Valores de 0.60 - 0.70 indican relaciones semánticas sólidas en Gemini Embeddings
-    var similarityThreshold: Float = 0.65f
+    // Se requiere una similitud mayor o igual al 50% (0.50) para considerar dos notas relacionadas
+    var similarityThreshold: Float = 0.50f
 
     // Clave de API de Google Gemini
     var apiKey: String = BuildConfig.GEMINI_API_KEY
@@ -37,13 +37,24 @@ object AutoLinker {
     private val embeddingCache = ConcurrentHashMap<String, FloatArray>()
 
     /**
-     * Determina si dos notas están semánticamente relacionadas mediante Gemini Embeddings
-     * o mediante coincidencia de palabras clave si Gemini no está disponible.
+     * Normaliza un texto convirtiéndolo a minúsculas y removiendo acentos/diacríticos.
+     */
+    fun normalizeText(text: String): String {
+        val nfdNormalized = java.text.Normalizer.normalize(text, java.text.Normalizer.Form.NFD)
+        val pattern = java.util.regex.Pattern.compile("\\p{InCombiningDiacriticalMarks}+")
+        return pattern.matcher(nfdNormalized).replaceAll("").lowercase()
+    }
+
+    /**
+     * Determina si dos notas están relacionadas mediante:
+     * 1. Mención directa de títulos entre sí
+     * 2. Solapamiento de palabras clave significativas (con acentos normalizados)
+     * 3. Similitud semántica con Gemini Embeddings (si está disponible)
      *
      * @param noteA Primera nota
      * @param noteB Segunda nota
-     * @param threshold Umbral de similitud de coseno (por defecto [similarityThreshold])
-     * @return true si la similitud es mayor o igual al umbral
+     * @param threshold Umbral de similitud de coseno para Gemini
+     * @return true si existe relación semántica o de contenido
      */
     suspend fun areNotesRelated(
         noteA: Note,
@@ -53,41 +64,76 @@ object AutoLinker {
         // Una nota no se enlaza consigo misma
         if (noteA.id != 0L && (noteA.id == noteB.id)) return false
 
+        // 1. Verificación por Gemini Embeddings (IA semántica)
         val similarity = calculateSimilarity(noteA, noteB)
         if (similarity > 0f) {
-            Log.d(TAG, "Similitud semántica entre Nota ${noteA.id} ('${noteA.title}') y Nota ${noteB.id} ('${noteB.title}'): $similarity (Umbral: $threshold)")
-            return similarity >= threshold
+            Log.d(TAG, "Similitud semántica Gemini entre Nota ${noteA.id} y Nota ${noteB.id}: $similarity (Umbral: $threshold)")
+            if (similarity >= threshold) return true
         }
 
-        // Fallback por coincidencias de texto si no hay embeddings (sin API Key o sin red)
-        val fallbackSim = calculateTextOverlapSimilarity(noteA, noteB)
-        Log.d(TAG, "Similitud por solapamiento de texto entre Nota ${noteA.id} y Nota ${noteB.id}: $fallbackSim")
-        return fallbackSim >= 0.20f
+        // 2. Verificación por coincidencia de palabras clave normalizadas (coincidencia de texto >= umbral)
+        val keywordSim = calculateNormalizedKeywordSimilarity(noteA, noteB)
+        if (keywordSim >= threshold) {
+            Log.d(TAG, "Relación por coincidencia de palabras clave entre Nota ${noteA.id} y Nota ${noteB.id}: $keywordSim (Umbral: $threshold)")
+            return true
+        }
+
+        // 3. Verificación directa por mención de título
+        if (hasTitleMention(noteA, noteB)) {
+            Log.d(TAG, "Mención directa de título entre Nota ${noteA.id} ('${noteA.title}') y Nota ${noteB.id} ('${noteB.title}')")
+            return true
+        }
+
+        return false
     }
 
     /**
-     * Calcula la similitud basada en la intersección de palabras clave significativas entre dos notas.
+     * Verifica si el título de una nota aparece dentro del título o contenido de la otra.
      */
-    private fun calculateTextOverlapSimilarity(noteA: Note, noteB: Note): Float {
+    private fun hasTitleMention(noteA: Note, noteB: Note): Boolean {
+        val normTitleA = normalizeText(noteA.title).trim()
+        val normTitleB = normalizeText(noteB.title).trim()
+
+        val normFullA = normalizeText("${noteA.title} ${noteA.content}")
+        val normFullB = normalizeText("${noteB.title} ${noteB.content}")
+
+        if (normTitleA.length >= 3 && normFullB.contains(normTitleA)) return true
+        if (normTitleB.length >= 3 && normFullA.contains(normTitleB)) return true
+
+        return false
+    }
+
+    /**
+     * Calcula la similitud basada en la intersección de palabras clave normalizadas entre dos notas.
+     */
+    private fun calculateNormalizedKeywordSimilarity(noteA: Note, noteB: Note): Float {
         val wordsA = extractKeywords("${noteA.title} ${noteA.content}")
         val wordsB = extractKeywords("${noteB.title} ${noteB.content}")
 
         if (wordsA.isEmpty() || wordsB.isEmpty()) return 0f
 
-        val intersection = wordsA.intersect(wordsB).size.toFloat()
-        val union = wordsA.union(wordsB).size.toFloat()
+        val intersection = wordsA.intersect(wordsB).size
+        if (intersection >= 2) return 1.0f // Comparten 2 o más palabras clave relevantes
 
-        return if (union > 0f) intersection / union else 0f
+        val minSize = minOf(wordsA.size, wordsB.size).toFloat()
+        val relativeOverlap = if (minSize > 0f) intersection.toFloat() / minSize else 0f
+
+        val union = wordsA.union(wordsB).size.toFloat()
+        val jaccard = if (union > 0f) intersection.toFloat() / union else 0f
+
+        return maxOf(relativeOverlap, jaccard)
     }
 
     private fun extractKeywords(text: String): Set<String> {
         val stopWords = setOf(
             "que", "los", "las", "un", "una", "unos", "unas", "de", "del", "a", "ante",
             "con", "en", "para", "por", "y", "o", "no", "si", "su", "sus", "el", "la",
-            "es", "son", "al", "lo", "como", "mas", "más", "esta", "este", "se", "todo", "toda"
+            "es", "son", "al", "lo", "como", "mas", "más", "esta", "este", "se", "todo", "toda",
+            "para", "pero", "entre", "sobre", "tras", "durante", "mediante", "nota", "notas"
         )
-        return text.lowercase()
-            .split(Regex("\\W+"))
+        val cleanText = normalizeText(text)
+        return cleanText
+            .split(Regex("[^a-z0-9]+"))
             .filter { it.length > 2 && it !in stopWords }
             .toSet()
     }

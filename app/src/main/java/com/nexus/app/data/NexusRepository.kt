@@ -63,9 +63,7 @@ class NexusRepository(private val dao: NexusDao) {
         dao.updateNote(note)
         // Invalida el embedding viejo de la nota en la caché para forzar recálculo
         AutoLinker.invalidateCacheForNote(note.id)
-        // Elimina los enlaces anteriores de la nota
-        dao.deleteLinksForNote(note.id)
-        // Vuelve a analizar e interconectar semánticamente con las demás notas
+        // Vuelve a analizar e interconectar semánticamente con las demás notas sin borrar los enlaces existentes
         autoLinkNote(note)
     }
 
